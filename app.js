@@ -11,7 +11,8 @@ var morgan = require("morgan");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan("combined"));
-app.use('/qr_codes', express.static('qr_codes'))
+app.use(express.static('public'));
+app.use('/qr_codes', express.static('qr_codes'));
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 

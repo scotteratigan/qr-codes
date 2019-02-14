@@ -21,7 +21,6 @@
   },
   "homepage": "https://github.com/scotteratigan/qr-codes#readme",
   "dependencies": {
-    "bcrypt": "^3.0.4",
     "bwip-js": "^1.7.1",
     "express": "^4.16.4"
   },
