@@ -3,11 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const MAX_FILENAME_LENGTH = 36; // not including extension
 
-async function createBarcode(text) {
+async function createBarcode(text, barcodeType) {
   return new Promise((resolve, reject) => {
     console.log('Creating QR code from text:', text);
     bwipjs.toBuffer({
-      bcid: 'qrcode',       // Barcode type
+      bcid: barcodeType,       // Barcode type - qrcode is default
       text: text,    // Text to encode
       scale: 3,               // 3x scaling factor
       // height:      10,              // Bar height, in millimeters
@@ -23,16 +23,16 @@ async function createBarcode(text) {
         // png.length           : PNG file length
         // png.readUInt32BE(16) : PNG image width
         // png.readUInt32BE(20) : PNG image height
-        const imageURL = await writeFile(png, text);
+        const imageURL = await writeFile(png, text, barcodeType);
         return resolve(imageURL);
       }
     });
   })
 }
 
-function writeFile(pngBuffer, text) {
+function writeFile(pngBuffer, text, barcodeType) {
   return new Promise((resolve, reject) => {
-    const filename = text.toLowerCase().replace(/[\s]+/gi, '_').replace(/[^\w]+/gi, '-').substring(0, MAX_FILENAME_LENGTH);
+    const filename = barcodeType + '-' + text.toLowerCase().replace(/[\s]+/gi, '_').replace(/[^\w]+/gi, '-').substring(0, MAX_FILENAME_LENGTH);
     const fileURL = path.join('qr_codes', filename + '.png');
     fs.writeFile(fileURL, pngBuffer, (err) => {
       if (err) {
@@ -47,7 +47,7 @@ function writeFile(pngBuffer, text) {
 module.exports = function (app) {
   app.post('/api/generate-qr-code', async (req, res) => {
     console.log('Received data:', req.body);
-    let imageURL = await createBarcode(req.body.text);
+    let imageURL = await createBarcode(req.body.text, req.body.type);
     // res.sendFile(path.join(__dirname, "../qr_codes/qrcode.png"));
     res.json({ url: imageURL });
   });

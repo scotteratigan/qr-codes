@@ -24,11 +24,24 @@
 				<div class="col-6 text-center">
 					<form>
 						<div class="form-group">
-							<label for="qrText">Text for QR Code</label>
-							<input type="text" class="form-control" id="qr-text" aria-describedby="qr-input-help"
-								placeholder="https://www.sampledomain.com">
-							<small id="qr-input-help" class="form-text text-muted">Enter the text that you'd like on your QR
-								Code.</small>
+							<p>
+								<label for="qrText">Text for QR Code</label>
+								<input type="text" class="form-control" id="qr-text" aria-describedby="qr-input-help"
+									placeholder="https://www.sampledomain.com">
+								<small id="qr-input-help" class="form-text text-muted">Enter the text that you'd like on your QR
+									Code.</small>
+							</p>
+							<p>
+								<label for="barcode-type">Barcode Type</label>
+								<select id="barcode-type" class="form-control">
+									<option selected>qrcode</option>
+									<option>azteccode</option>
+									<option>microqrcode</option>
+									<option>datamatrix</option>
+									<option>pdf417</option>
+									<option>hanxin</option>
+								</select>
+							</p>
 						</div>
 						<button type="submit" class="btn btn-primary" id="generate-qr-code">Generate QR Code</button>
 					</form>
