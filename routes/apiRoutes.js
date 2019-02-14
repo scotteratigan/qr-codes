@@ -46,7 +46,7 @@ function writeFile(pngBuffer, text, barcodeType) {
   });
 }
 
-module.exports = function (app) {
+module.exports = app => {
   app.post('/api/generate-qr-code', async (req, res) => {
     console.log('Received data:', req.body);
     let imageURL = await createBarcode(req.body.text, req.body.type);
