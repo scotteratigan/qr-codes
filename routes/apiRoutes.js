@@ -17,6 +17,7 @@ async function createBarcode(text, barcodeType) {
       if (err) {
         // `err` may be a string or Error object
         console.error(err); // todo: add error handling display on the client side
+        return reject();
       } else {
         // console.log(png);
         // png is a Buffer
@@ -36,7 +37,8 @@ function writeFile(pngBuffer, text, barcodeType) {
     const fileURL = path.join('qr_codes', filename + '.png');
     fs.writeFile(fileURL, pngBuffer, (err) => {
       if (err) {
-        return console.log(err);
+        console.error(err);
+        return reject();
       }
       console.log("The file was saved!");
       return resolve(fileURL);
