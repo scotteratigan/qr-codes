@@ -6,11 +6,11 @@
 var express = require("express");
 var app = express();
 var PORT = process.env.PORT || 8080;
-var morgan = require("morgan");
+// var morgan = require("morgan");
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan("combined"));
+// app.use(morgan("combined"));
 app.use(express.static('public'));
 app.use('/qr_codes', express.static('qr_codes'));
 require("./routes/apiRoutes")(app);
