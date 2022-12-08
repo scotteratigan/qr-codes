@@ -23,7 +23,7 @@
   "homepage": "https://github.com/scotteratigan/qr-codes#readme",
   "dependencies": {
     "bwip-js": "^1.7.1",
-    "express": "^4.16.4"
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "morgan": "^1.9.1"
